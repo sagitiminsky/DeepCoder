@@ -55,9 +55,11 @@ pre_comb_model=0
 s = n_s = 15  # <- this has to be the same samples for the noise and signal
 
 NEURONS_LAYER_1 = 20
-NEURONS_LAYER_2 = 200
-NEURONS_LAYER_3 = 20
-NEURONS_LAYER_4 = 20
+NEURONS_LAYER_2 = 100
+NEURONS_LAYER_3 = 150
+NEURONS_LAYER_4 = 300
+NEURONS_LAYER_5 = 150
+NEURONS_LAYER_6 = 20
 
 select = 0
 """ {1}: 1:1 """
@@ -458,12 +460,12 @@ def my_dice_loss(smooth, thresh,model):
 def baseline_model_g(m, k):
     model = Sequential()
     model.add(Dense(s, activation='relu', input_shape=(m,), name="input_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_1_g"))
+    model.add(Dense(NEURONS_LAYER_1, activation='relu', name="layer_1_g"))
     model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_2_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_3_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_4_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_5_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_6_g"))
+    model.add(Dense(NEURONS_LAYER_3, activation='relu', name="layer_3_g"))
+    model.add(Dense(NEURONS_LAYER_4, activation='relu', name="layer_4_g"))
+    model.add(Dense(NEURONS_LAYER_5, activation='relu', name="layer_5_g"))
+    model.add(Dense(NEURONS_LAYER_6, activation='relu', name="layer_6_g"))
     model.add(Dense(k, activation='linear', name="output_g"))
     # model.add(GaussianNoise(k , name="noise_"))
 
@@ -475,12 +477,12 @@ def baseline_model_h(m, k):
     model = Sequential()
     model.add(GaussianNoise(k ,input_shape=(k,),name="noise"))
     model.add(Dense(s, activation='relu',name="input_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_1_h"))
+    model.add(Dense(NEURONS_LAYER_1, activation='relu', name="layer_1_h"))
     model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_2_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_3_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_4_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_5_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_6_h"))
+    model.add(Dense(NEURONS_LAYER_3, activation='relu', name="layer_3_h"))
+    model.add(Dense(NEURONS_LAYER_4, activation='relu', name="layer_4_h"))
+    model.add(Dense(NEURONS_LAYER_5, activation='relu', name="layer_5_h"))
+    model.add(Dense(NEURONS_LAYER_6, activation='relu', name="layer_6_h"))
     model.add(Dense(m, activation='linear',name="output_h"))
     r_optimizer = Adam()
     model.compile(optimizer=r_optimizer, loss=mean_squared_error)
@@ -489,21 +491,21 @@ def baseline_model_h(m, k):
 def baseline_model(m, k):
     model = Sequential()
     model.add(Dense(s, activation='relu', input_shape=(m,),name="input_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_1_g"))
+    model.add(Dense(NEURONS_LAYER_1, activation='relu', name="layer_1_g"))
     model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_2_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_3_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_4_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_5_g"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_6_g"))
+    model.add(Dense(NEURONS_LAYER_3, activation='relu', name="layer_3_g"))
+    model.add(Dense(NEURONS_LAYER_4, activation='relu', name="layer_4_g"))
+    model.add(Dense(NEURONS_LAYER_5, activation='relu', name="layer_5_g"))
+    model.add(Dense(NEURONS_LAYER_6, activation='relu', name="layer_6_g"))
     model.add(Dense(k,activation='linear', name="output_g"))
     model.add(GaussianNoise(k,name="noise"))
     model.add(Dense(s,name="input_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_1_h"))
+    model.add(Dense(NEURONS_LAYER_1, activation='relu', name="layer_1_h"))
     model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_2_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_3_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_4_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_5_h"))
-    model.add(Dense(NEURONS_LAYER_2, activation='relu', name="layer_6_h"))
+    model.add(Dense(NEURONS_LAYER_3, activation='relu', name="layer_3_h"))
+    model.add(Dense(NEURONS_LAYER_4, activation='relu', name="layer_4_h"))
+    model.add(Dense(NEURONS_LAYER_5, activation='relu', name="layer_5_h"))
+    model.add(Dense(NEURONS_LAYER_6, activation='relu', name="layer_6_h"))
     model.add(Dense(m ,activation='linear', name="ouput_h"))
     model_my_loss = my_dice_loss(smooth=1e-5, thresh=PT,model=model)
     model.compile(optimizer=Adam(), loss=mean_squared_error)
