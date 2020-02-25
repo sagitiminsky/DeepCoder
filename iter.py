@@ -24,7 +24,7 @@ s=10
 n_s=7
 my_ftol=1e-6
 my_maxIter=5
-select=7
+select=0
 """ {1}: 1:1 , {3}: 2:1  , {4}: 1:2  , {7}: 2:2"""
 c=2
 pos=2
